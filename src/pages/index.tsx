@@ -132,7 +132,6 @@ export default function Home() {
       setWindows([..._windows]);
       return;
     }
-    console.info("Launching program: ", program);
     if (!program) return;
     const _windows = windows;
     _windows.push(program);
@@ -145,11 +144,21 @@ export default function Home() {
     _windows[index].hidden = true;
     setWindows([..._windows]);
     const availableWindows = [] as Array<WindowProps>;
-    _windows.forEach(
-      (el) => !el.hidden && el.showInTaskbar && availableWindows.push(el)
-    );
+    _windows.forEach((el) => {
+      if (el.hidden == false && el.showInTaskbar == true) {
+        availableWindows.push(el);
+      }
+    });
+    if (availableWindows.length == 0) {
+      setLastIndex(0);
+      return;
+    }
     const random = Math.floor(Math.random() * availableWindows.length);
-    setLastIndex(random);
+    const randomWindow = availableWindows[random].id;
+    const getRandomIndexWindowOnWindows = _windows.findIndex(
+      (window) => window.id == randomWindow
+    );
+    setLastIndex(getRandomIndexWindowOnWindows);
   }
 
   function onTaskbarWindowClick(index: number) {

@@ -5,7 +5,13 @@ export function AboutMe() {
     <div className="about-me">
       <div className="status-bar">
         <p className="status-bar-field">
-          <Image src="/eren98.png" width={200} height={200} alt="eren" />
+          <Image
+            src="/eren98.png"
+            width={200}
+            height={200}
+            alt="eren"
+            priority
+          />
         </p>
       </div>
       <span className="about-me-title">Hey, I'm Eren Kulaksiz.</span>

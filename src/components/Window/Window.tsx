@@ -128,7 +128,10 @@ export function Window({
         if (boundaries?.left >= 0 && boundaries?.right <= width) {
           position.current = {
             ...position.current,
-            x: event.touches[0].clientX <= 0 ? 0 : event.touches[0].clientX,
+            x:
+              event.touches[0].clientX <= 0
+                ? 0
+                : event.touches[0].clientX - boundaries.width / 2,
           };
         } else {
           if (boundaries?.right >= width) {
@@ -146,7 +149,8 @@ export function Window({
         if (boundaries?.top >= 0 && boundaries?.bottom <= height) {
           position.current = {
             ...position.current,
-            y: event.touches[0].clientY <= 0 ? 0 : event.touches[0].clientY,
+            y:
+              event.touches[0].clientY <= 0 ? 0 : event.touches[0].clientY - 14,
           };
         } else {
           if (boundaries?.bottom >= height) {

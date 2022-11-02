@@ -32,8 +32,12 @@ export function Taskbar({
       shutdownButtonRef.current.getBoundingClientRect();
     //setStartOpen(false);
     if (!boundaries) return;
-    const randomX = Math.floor(Math.random() * boundaries?.right - width);
-    const randomY = Math.floor(Math.random() * boundaries?.bottom - height);
+    const randomX = Math.abs(
+      Math.floor(Math.random() * boundaries?.right - width)
+    );
+    const randomY = Math.abs(
+      Math.floor(Math.random() * boundaries?.bottom - height)
+    );
     shutdownButtonRef.current.style.position = "absolute";
     shutdownButtonRef.current.style.left = `${randomX}px`;
     shutdownButtonRef.current.style.bottom = `${randomY}px`;
