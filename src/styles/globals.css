@@ -342,3 +342,7 @@ img {
   align-items: flex-start;
   padding: 10px;
 }
+
+button{
+  color: black;
+}

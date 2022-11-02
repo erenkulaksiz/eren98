@@ -26,7 +26,7 @@ export function Taskbar({
     return () => clearInterval(interval);
   }, []);
 
-  function onMouseEnter() {
+  function onShuwdownButtonHover() {
     if (!shutdownButtonRef.current) return;
     const { x, y, width, height } =
       shutdownButtonRef.current.getBoundingClientRect();
@@ -64,7 +64,8 @@ export function Taskbar({
             <div className="start-menu-seperator"></div>
             <button
               className="start-menu-button"
-              onMouseEnter={() => onMouseEnter()}
+              onMouseEnter={() => onShuwdownButtonHover()}
+              onDragStart={() => onShuwdownButtonHover()}
               ref={shutdownButtonRef}
             >
               <Image

@@ -54,6 +54,7 @@ export function Window({
         event.preventDefault();
         const boundaries = ref.current?.getBoundingClientRect();
         if (!boundaries) return;
+        // Y axis
         if (boundaries?.left >= 0 && boundaries?.right <= width) {
           position.current = {
             ...position.current,
@@ -64,6 +65,7 @@ export function Window({
           };
         } else {
           if (boundaries?.right >= width) {
+            if (event.movementX > 0) return;
             position.current = {
               ...position.current,
               x: width - boundaries.width,
@@ -75,6 +77,7 @@ export function Window({
             };
           }
         }
+        // X axis
         if (boundaries?.top >= 0 && boundaries?.bottom <= height) {
           position.current = {
             ...position.current,
@@ -85,6 +88,7 @@ export function Window({
           };
         } else {
           if (boundaries?.bottom >= height) {
+            if (event.movementY > 0) return;
             position.current = {
               ...position.current,
               y: height - boundaries.height,
