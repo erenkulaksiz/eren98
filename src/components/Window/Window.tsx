@@ -209,7 +209,12 @@ export function Window({
         {(controls?.maximize || controls?.minimize || controls?.close) && (
           <div className="title-bar-controls">
             {controls?.minimize && (
-              <button aria-label="Minimize" onClick={onMinimize} />
+              <button
+                aria-label="Minimize"
+                onClick={() =>
+                  typeof onMinimize == "function" && onMinimize(index ?? 0)
+                }
+              />
             )}
             {controls?.maximize && (
               <button aria-label="Maximize" onClick={onMaximize} />

@@ -43,8 +43,6 @@ export default function Home() {
       },
     },
   ]);
-  const [shutdownTries, setShutdownTries] = useState<number>(0);
-
   useEffect(() => {
     onProgramClick({ id: "about_me" });
     onProgramClick({ id: "socials" });
@@ -57,7 +55,7 @@ export default function Home() {
       id: "about_me",
       title: "About Me",
       icon: "/icons/about.png",
-      controls: { close: true },
+      controls: { close: true, minimize: true },
       hidden: false,
       showInTaskbar: true,
       children: <AboutMe />,
@@ -71,7 +69,7 @@ export default function Home() {
       id: "socials",
       title: "Social Links",
       icon: "/icons/socials.png",
-      controls: { close: true },
+      controls: { close: true, minimize: true },
       hidden: false,
       showInTaskbar: true,
       children: <Socials />,
@@ -84,7 +82,7 @@ export default function Home() {
       id: "projects",
       title: "Projects",
       icon: "/icons/projects.png",
-      controls: { close: true },
+      controls: { close: true, minimize: true },
       hidden: false,
       showInTaskbar: true,
       children: <Projects />,
@@ -140,6 +138,25 @@ export default function Home() {
     _windows.push(program);
     setWindows([...windows]);
     setLastIndex(_windows.length - 1); // focus when program starts
+  }
+
+  function onWindowMinimize(index: number) {
+    const _windows = windows;
+    _windows[index].hidden = true;
+    setWindows([..._windows]);
+    const availableWindows = [] as Array<WindowProps>;
+    _windows.forEach(
+      (el) => !el.hidden && el.showInTaskbar && availableWindows.push(el)
+    );
+    const random = Math.floor(Math.random() * availableWindows.length);
+    setLastIndex(random);
+  }
+
+  function onTaskbarWindowClick(index: number) {
+    const _windows = windows;
+    _windows[index].hidden = false;
+    setWindows([..._windows]);
+    setLastIndex(index);
   }
 
   return (
@@ -208,6 +225,7 @@ export default function Home() {
           onClose={(index) => onWindowClose(index)}
           key={index + "_w"}
           onMouseDown={(index) => onWindowMouseDown(index)}
+          onMinimize={(index: number) => onWindowMinimize(index)}
           lastIndex={lastIndex}
         />
       ))}
@@ -223,7 +241,7 @@ export default function Home() {
       <Taskbar
         windows={windows}
         lastIndex={lastIndex}
-        onWindowClick={(index) => setLastIndex(index)}
+        onWindowClick={(index) => onTaskbarWindowClick(index)}
         boundaries={boundaries}
       />
     </main>

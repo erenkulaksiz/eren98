@@ -9,7 +9,7 @@ export interface WindowProps {
     maximize?: boolean;
     close?: boolean;
   };
-  onMinimize?: () => void;
+  onMinimize?: (index: number) => void;
   onMaximize?: () => void;
   onClose?: (index?: number) => void;
   onMouseDown?: (index?: number) => void;
