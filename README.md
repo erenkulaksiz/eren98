@@ -1,4 +1,6 @@
-## Getting Started
+## View live version [http://erenk.dev](http://erenk.dev)
+
+# Getting Started
 
 First, run the development server:
 
