@@ -347,3 +347,213 @@ img {
 button{
   color: black;
 }
+
+.source{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.source .source-tech{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recycle {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.recycle-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.recycle-container .top-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.recycle-header{
+  display: flex;
+  flex-direction: column;
+  padding: 1px;
+}
+
+.vertical-seperator{
+  width: 4px;
+  box-shadow: inset -1px -1px #808080, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+}
+
+.vertical-inside {
+  width: 2px;
+  box-shadow: inset -1px -1px #dfdfdf, inset 1px 1px grey, inset -2px -2px #fff, inset 2px 2px #808080;
+}
+
+.file{
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  box-shadow: inset 0px -1px #808080;
+}
+
+.file button{
+  padding: 0px, 2px, 0px, 2px;
+  box-shadow: none;
+  min-width: 0px;
+  min-height: 0px;
+  height: 18px;
+}
+
+.file button::first-letter{
+  text-decoration:underline;
+}
+
+.file button:active{
+  padding: 0px, 2px, 0px, 2px;
+  box-shadow: none;
+  min-width: 0px;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 2px;
+  box-shadow: inset 0px -1px #808080;
+}
+
+.buttons .nav{
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: none;
+  min-width: 0;
+  height: 48px;
+  gap: 4px;
+}
+
+.buttons .nav:first-of-type{
+  margin-left: 8px;
+}
+
+.alt{
+  display: flex;
+  margin-top: 16px;
+}
+
+.social-link{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.socials .status-bar .status-bar-field{
+  padding: 4px;
+  box-shadow: inset -1px -1px #808080, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+}
+
+.about-me .status-bar .status-bar-field{
+  padding: 4px;
+  box-shadow: inset -1px -1px #808080, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+}
+
+.address{
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+}
+
+.address .address-content{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 4px;
+  width: 100%;
+}
+
+.address-text::first-letter{
+  text-decoration:underline;
+}
+
+.address-select{
+  display: flex;
+  width: 100% !important;
+}
+
+.recycle-content{
+  display: flex;
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.stories{
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.story-title{
+  font-size: 1.5em;
+  margin-top: 6px;
+}
+
+.story-logo{
+  padding: 4px;
+  box-shadow: inset -1px -1px #808080, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+}
+
+.notepad-header{
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 2px;
+  padding-left: 2px;
+}
+
+.notepad-header button{
+  padding-left: 6px;
+  padding-right: 6px;
+  box-shadow: none;
+  min-width: 0px;
+  min-height: 0px;
+  height: 18px;
+}
+
+.notepad-header button::first-letter{
+  text-decoration:underline;
+}
+
+.notepad-header button:active{
+  box-shadow: none;
+  min-width: 0px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.notepad{
+  padding: 0;
+  margin: 0;
+}
+
+.notepad-container pre{
+  overflow-y: scroll;
+  overflow-x: scroll;
+  height: 600px;
+  padding: 4px;
+}
+
+.loading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

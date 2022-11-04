@@ -25,4 +25,6 @@ export interface WindowProps {
   icon?: string;
   windowWidth?: number;
   windowHeight?: number;
+  windowBodyClass?: string;
+  showInScreen?: boolean; // dont show in main screen, for hidden programs
 }

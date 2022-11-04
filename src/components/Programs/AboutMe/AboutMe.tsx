@@ -15,18 +15,32 @@ export function AboutMe() {
         </p>
       </div>
       <span className="about-me-title">Hey, I'm Eren Kulaksiz.</span>
-      <span className="about-me-desc">
-        {
-          "I live in Istanbul and currently on second grade of Computer Programming in Istanbul Arel University. I'm a passionate Frontend Developer that enjoys while designing UI's with Figma, and converting them to pixel-perfect codes. I enjoy learning new technologies also trying to constantly improve myself."
-        }
+      <span
+        className="about-me-desc"
+        dangerouslySetInnerHTML={{
+          __html:
+            "I live in <b>Istanbul</b> and currently on second grade of Computer Programming in Istanbul Arel University. I'm a passionate Frontend Developer that enjoys while designing UI's with Figma, and converting them to pixel-perfect codes. I enjoy learning new technologies also trying to constantly improve myself.",
+        }}
+      />
+      <span>
+        I love <b>quality</b> people and using <b>quality</b> products. Thats
+        why i always try to build quality products that myself and people can
+        use.
       </span>
       <span>Here are some quick facts: </span>
       <ul>
-        <li>Favourite film: Interstellar</li>
-        <li>Nationality: Turkish</li>
-        <li>Currently living in: Türkiye</li>
-        <li>Favourite language: JavaScript</li>
-        <li>Most hated field of software: PHP :P</li>
+        <li>
+          Favourite film: <b>Interstellar</b>
+        </li>
+        <li>
+          Nationality: <b>Turkish</b>
+        </li>
+        <li>
+          Currently living in: <b>Turkey</b>
+        </li>
+        <li>
+          Favourite language: <b>JavaScript</b>
+        </li>
       </ul>
     </div>
   );

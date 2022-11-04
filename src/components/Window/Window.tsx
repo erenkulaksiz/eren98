@@ -29,6 +29,7 @@ export function Window({
   },
   lastIndex,
   icon,
+  windowBodyClass,
 }: WindowProps) {
   const { height, width } = useWindowDimensions();
   const position = useRef<{ x: number; y: number }>({
@@ -236,7 +237,9 @@ export function Window({
           </div>
         )}
       </div>
-      <div className="window-body">{children}</div>
+      <div className={windowBodyClass ? windowBodyClass : "window-body"}>
+        {children}
+      </div>
     </div>
   );
 }

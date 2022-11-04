@@ -1,21 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 
-import {
-  Taskbar,
-  Window,
-  Program,
-  AboutMe,
-  Socials,
-  Projects,
-} from "@components";
+import { Taskbar, Window, Program, Seo } from "@components";
 import { useWindowDimensions } from "@hooks";
+import { getLaunchablePrograms } from "@constants";
 import type { WindowProps } from "@components/Window/Window.types";
 
 export default function Home() {
   const { height, width } = useWindowDimensions();
-  const ref = useRef<HTMLDivElement>(null);
-  const boundaries = ref.current?.getBoundingClientRect();
   const [lastIndex, setLastIndex] = useState<number>(0);
   const [windows, setWindows] = useState<Array<WindowProps>>([
     {
@@ -43,6 +35,9 @@ export default function Home() {
       },
     },
   ]);
+  const ref = useRef<HTMLDivElement>(null);
+  const boundaries = ref.current?.getBoundingClientRect();
+
   useEffect(() => {
     onProgramClick({ id: "about_me" });
     onProgramClick({ id: "socials" });
@@ -50,55 +45,15 @@ export default function Home() {
     setLastIndex(0);
   }, []);
 
-  const launchablePrograms = [
-    {
-      id: "about_me",
-      title: "About Me",
-      icon: "/icons/about.png",
-      controls: { close: true, minimize: true },
-      hidden: false,
-      showInTaskbar: true,
-      children: <AboutMe />,
-      initialPos: {
-        x: width / 3.5,
-        y: height / 4,
-      },
-      windowWidth: 260,
-    },
-    {
-      id: "socials",
-      title: "Social Links",
-      icon: "/icons/socials.png",
-      controls: { close: true, minimize: true },
-      hidden: false,
-      showInTaskbar: true,
-      children: <Socials />,
-      initialPos: {
-        x: width / 2.4,
-        y: height / 3,
-      },
-    },
-    {
-      id: "projects",
-      title: "Projects",
-      icon: "/icons/projects.png",
-      controls: { close: true, minimize: true },
-      hidden: false,
-      showInTaskbar: true,
-      children: <Projects />,
-      initialPos: {
-        x: width / 2,
-        y: height / 1.8,
-      },
-      windowWidth: 400,
-    },
-  ] as Array<WindowProps>;
+  const launchablePrograms = getLaunchablePrograms(width, height, (id) =>
+    onProgramClick({ id })
+  );
 
   function onPopupClose(id: string) {
     const _windows = windows;
     const window = windows.findIndex((window) => window.id == id);
     _windows[window].hidden = true;
-    setWindows([...windows]);
+    setWindows([..._windows]);
   }
 
   function onWindowClose(index?: number) {
@@ -115,13 +70,7 @@ export default function Home() {
     setLastIndex(index);
   }
 
-  function onProgramClick({
-    event,
-    id,
-  }: {
-    event?: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>;
-    id: string;
-  }) {
+  function onProgramClick({ id }: { id: string }) {
     const program = launchablePrograms.find((program) => program.id == id);
     const findWindowIndex = windows.findIndex((window) => window.id == id);
     if (findWindowIndex != -1) {
@@ -172,62 +121,9 @@ export default function Home() {
     <main className="container" ref={ref}>
       <Head>
         <title>erenk.dev</title>
-        <meta name="description" content="Eren Kulaksiz's Personal Website" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta charSet="UTF-8" />
-        <head
-          dangerouslySetInnerHTML={{
-            __html: `
-<!-- https://i.pinimg.com/originals/60/c1/4a/60c14a43fb4745795b3b358868517e79.png -->
-`,
-          }}
-        ></head>
-        <meta
-          property="apple-mobile-web-app-capable"
-          name="apple-mobile-web-app-capable"
-          content="yes"
-        />
-        <meta
-          property="apple-mobile-web-app-status-bar-style"
-          name="apple-mobile-web-app-status-bar-style"
-          content="default"
-        />
-        <meta
-          property="format-detection"
-          name="format-detection"
-          content="telephone=no"
-        />
-        <meta
-          property="mobile-web-app-capable"
-          name="mobile-web-app-capable"
-          content="yes"
-        />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <meta property="twitter:card" name="twitter:card" content="summary" />
-        <meta
-          property="twitter:url"
-          name="twitter:url"
-          content="https://erenk.dev"
-        />
-        <meta
-          property="twitter:creator"
-          name="twitter:creator"
-          content="@erencode"
-        />
-        <meta property="twitter:site" name="twitter:site" content="@erencode" />
-        <meta property="og:type" name="og:type" content="website" />
-        <meta property="og:site_name" name="og:site_name" content="erenk.dev" />
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=G-V0RX3S6JG7`}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-V0RX3S6JG7', {page_path: window.location.pathname,});`,
-          }}
-        />
+        <Seo />
       </Head>
-      {windows.map((window, index: number) => (
+      {windows.map((window: WindowProps, index: number) => (
         <Window
           {...window}
           index={index}
@@ -239,13 +135,16 @@ export default function Home() {
         />
       ))}
       <div className="program-container">
-        {launchablePrograms.map((program: WindowProps, index: number) => (
-          <Program
-            {...program}
-            key={index + "_p"}
-            onClick={({ event, id }) => onProgramClick({ event, id })}
-          />
-        ))}
+        {launchablePrograms.map((program: WindowProps, index: number) => {
+          if (program?.showInScreen == false) return;
+          return (
+            <Program
+              {...program}
+              key={index + "_p"}
+              onClick={({ id }) => onProgramClick({ id })}
+            />
+          );
+        })}
       </div>
       <Taskbar
         windows={windows}
