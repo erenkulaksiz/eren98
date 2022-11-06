@@ -83,7 +83,7 @@ export function Socials() {
       <div className="status-bar">
         <p className="status-bar-field">
           <Link
-            href="https://linkedin.com/erenkulaksiz"
+            href="https://linkedin.com/in/erenkulaksiz"
             passHref
             target="_blank"
             title="Linkedin"
