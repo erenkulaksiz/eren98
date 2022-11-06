@@ -83,6 +83,25 @@ export function Socials() {
       <div className="status-bar">
         <p className="status-bar-field">
           <Link
+            href="https://linkedin.com/erenkulaksiz"
+            passHref
+            target="_blank"
+            title="Linkedin"
+            className="social-link"
+          >
+            <Image
+              src="/icons/linkedin.png"
+              width={64}
+              height={64}
+              alt="linkedin icon"
+            />
+            <span>Linkedin</span>
+          </Link>
+        </p>
+      </div>
+      <div className="status-bar">
+        <p className="status-bar-field">
+          <Link
             href="mailto:erenkulaksz@gmail.com"
             passHref
             title="E-mail"
